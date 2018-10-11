@@ -1,5 +1,5 @@
 # FTS Specific
-This is a FTS fork of the hortonworks schema registry based on branch 0.3.0 to patch issues that have been found in the public version. To address version conflict issues this FTS specific version is versioned using a "-fts" suffix such as "0.3.0-fts" which is intended to match with the public version 0.3.0 with FTS modifications. 
+This is a FTS fork of the hortonworks schema registry based on branch 0.3.0 to patch issues that have been found in the public version. To address version conflict issues this FTS specific version is versioned using a "-fts" suffix such as "0.3.0.1-fts" which is intended to match with the public version 0.3.0 with FTS modifications. 
 
 To build this fork and publish to our local nexus repos the project has been updated to point to our local nexus and to remove public repos that pose problems, so building and publishing should not be any different then any of our other projects.
 
