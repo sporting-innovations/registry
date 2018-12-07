@@ -135,7 +135,7 @@ public class DefaultSchemaRegistry implements ISchemaRegistry {
         schemaVersionInfoCache = new SchemaVersionInfoCache(
                 schemaVersionRetriever,
                 options.getMaxSchemaCacheSize(),
-                options.getSchemaExpiryInSecs());
+                options.getSchemaExpiryInSecs() * 1000L);
 
         storageManager.registerStorables(
                 Arrays.asList(
