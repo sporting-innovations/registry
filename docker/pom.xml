@@ -20,7 +20,7 @@ limitations under the License.
     <parent>
         <artifactId>registries</artifactId>
         <groupId>com.hortonworks.registries</groupId>
-        <version>0.3.0.2-fts</version>
+        <version>0.3.0.3-fts</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
