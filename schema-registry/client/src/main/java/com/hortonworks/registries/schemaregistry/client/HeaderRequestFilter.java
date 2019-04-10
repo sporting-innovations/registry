@@ -9,6 +9,7 @@ import java.io.IOException;
 public class HeaderRequestFilter implements ClientRequestFilter {
     @Override
     public void filter(ClientRequestContext requestContext) throws IOException {
-        requestContext.getHeaders().add("X-Registry-Client-Version", "0.3.0.4-fts");
+        requestContext.getHeaders().add("X-Registry-Client-Version", "0.3.0.5-fts");
+        requestContext.getHeaders().add("User-Agent", "schema-registry-client-0.3.0.5-fts");
     }
 }
