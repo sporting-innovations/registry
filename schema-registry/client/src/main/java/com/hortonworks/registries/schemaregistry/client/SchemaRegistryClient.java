@@ -300,6 +300,7 @@ public class SchemaRegistryClient implements ISchemaRegistryClient {
 
     protected ClientConfig createClientConfig(Map<String, ?> conf) {
         ClientConfig config = new ClientConfig();
+        config.register(HeaderRequestFilter.class);
         config.property(ClientProperties.CONNECT_TIMEOUT, DEFAULT_CONNECTION_TIMEOUT);
         config.property(ClientProperties.READ_TIMEOUT, DEFAULT_READ_TIMEOUT);
         config.property(ClientProperties.FOLLOW_REDIRECTS, true);
