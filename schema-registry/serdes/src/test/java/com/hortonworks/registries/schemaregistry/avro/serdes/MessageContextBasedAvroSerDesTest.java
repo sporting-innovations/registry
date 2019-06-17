@@ -26,6 +26,7 @@ import com.hortonworks.registries.schemaregistry.SchemaVersionInfo;
 import com.hortonworks.registries.schemaregistry.SchemaVersionKey;
 import com.hortonworks.registries.schemaregistry.avro.AvroSchemaProvider;
 import com.hortonworks.registries.schemaregistry.client.SchemaRegistryClient;
+import com.hortonworks.registries.schemaregistry.serdes.avro.AvroUtils;
 import com.hortonworks.registries.serdes.Device;
 import mockit.Expectations;
 import mockit.Mocked;
@@ -80,5 +81,5 @@ public class MessageContextBasedAvroSerDesTest {
         deserializer.init(Collections.emptyMap());
         Object deserializedObject = deserializer.deserialize(messageContext, null);
 
-        Assert.assertTrue(SpecificData.get().compare(input, deserializedObject, input.getSchema()) == 0);    }
+        Assert.assertTrue(AvroUtils.getSpecificData().compare(input, deserializedObject, input.getSchema()) == 0);    }
 }

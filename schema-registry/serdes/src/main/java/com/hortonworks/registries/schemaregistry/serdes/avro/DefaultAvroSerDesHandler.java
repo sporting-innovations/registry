@@ -107,16 +107,18 @@ public class DefaultAvroSerDesHandler implements AvroSerDesHandler {
                 readerSchema = this.getReaderSchema(writerSchema);
             }
 
-            return new SpecificDatumReader(writerSchema, readerSchema);
+            return new SpecificDatumReader(writerSchema, readerSchema, AvroUtils.getSpecificData());
         } else {
-            return readerSchema == null ? new GenericDatumReader(writerSchema) : new GenericDatumReader(writerSchema, readerSchema);
+            return readerSchema == null
+                    ? new GenericDatumReader(writerSchema, writerSchema, AvroUtils.getGenericData())
+                    : new GenericDatumReader(writerSchema, readerSchema, AvroUtils.getGenericData());
         }
     }
 
     private Schema getReaderSchema(Schema writerSchema) {
         Schema readerSchema = this.readerSchemaCache.get(writerSchema.getFullName());
         if (readerSchema == null) {
-            Class readerClass = SpecificData.get().getClass(writerSchema);
+            Class readerClass = AvroUtils.getSpecificData().getClass(writerSchema);
             if (readerClass == null) {
                 throw new AvroException("Could not find class " + writerSchema.getFullName() + " specified in writer\'s schema whilst finding reader\'s schema for a SpecificRecord.");
             }

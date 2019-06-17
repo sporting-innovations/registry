@@ -18,11 +18,14 @@ package com.hortonworks.registries.schemaregistry.serdes.avro;
 import com.hortonworks.registries.schemaregistry.serdes.avro.exceptions.AvroException;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericContainer;
+import org.apache.avro.generic.GenericData;
+import org.apache.avro.specific.SpecificData;
 
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ServiceLoader;
 
 /**
  * Utils class for Avro related functionality.
@@ -31,6 +34,8 @@ public final class AvroUtils {
     public static final Charset UTF_8 = Charset.forName("UTF-8");
 
     private static final Map<Schema.Type, Schema> PRIMITIVE_SCHEMAS;
+
+    private static final ServiceLoader<AvroDataProvider> DATA_PROVIDERS = ServiceLoader.load(AvroDataProvider.class);
 
     static {
         Map<Schema.Type, Schema> map = new HashMap<>();
@@ -79,6 +84,14 @@ public final class AvroUtils {
             schema = AvroUtils.getSchemaForPrimitives(input);
         }
         return schema;
+    }
+
+    public static GenericData getGenericData() {
+        return DATA_PROVIDERS.iterator().next().getGenericData();
+    }
+
+    public static SpecificData getSpecificData() {
+        return DATA_PROVIDERS.iterator().next().getSpecificData();
     }
 
 }

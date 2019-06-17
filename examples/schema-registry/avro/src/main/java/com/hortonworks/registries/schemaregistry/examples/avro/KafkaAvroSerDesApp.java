@@ -17,6 +17,7 @@
 package com.hortonworks.registries.schemaregistry.examples.avro;
 
 import com.hortonworks.registries.schemaregistry.serde.SerDesException;
+import com.hortonworks.registries.schemaregistry.serdes.avro.AvroUtils;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericDatumReader;
 import org.apache.avro.io.DatumReader;
@@ -146,7 +147,7 @@ public class KafkaAvroSerDesApp {
     }
 
     private Object jsonToAvro(String jsonString, Schema schema) throws Exception {
-        DatumReader<Object> reader = new GenericDatumReader<>(schema);
+        DatumReader<Object> reader = new GenericDatumReader<>(schema, schema, AvroUtils.getGenericData());
         Object object = reader.read(null, DecoderFactory.get().jsonDecoder(schema, jsonString));
 
         if (schema.getType().equals(Schema.Type.STRING)) {

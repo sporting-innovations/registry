@@ -99,9 +99,11 @@ public class ConfluentAvroSerDesHandler implements AvroSerDesHandler {
                 readerSchema = this.getReaderSchema(writerSchema);
             }
 
-            return new SpecificDatumReader(writerSchema, readerSchema);
+            return new SpecificDatumReader(writerSchema, readerSchema, AvroUtils.getSpecificData());
         } else {
-            return readerSchema == null ? new GenericDatumReader(writerSchema) : new GenericDatumReader(writerSchema, readerSchema);
+            return readerSchema == null
+                    ? new GenericDatumReader(writerSchema, writerSchema, AvroUtils.getGenericData())
+                    : new GenericDatumReader(writerSchema, readerSchema, AvroUtils.getGenericData());
         }
     }
 
